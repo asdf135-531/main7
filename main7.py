@@ -96,6 +96,11 @@ def inside(x, y, z, plane):
 
 
 def kub(s):
+    eps = 1e-9
+    for i in range(6):
+        val = plane[i].A * s.x0 + plane[i].B * s.y0 + plane[i].C * s.z0 + plane[i].D
+        if abs(val) < eps:
+            return 1.0
     count = 0
     N = 1000
 
@@ -209,3 +214,6 @@ print("источник в центре:", kub(s))
 
 s = source(0, 0, d/2)
 print("источник в центре грани:", kub(s))
+
+s = source(d/2, 0, d/2)
+print("источник в центре ребра:", kub(s))
